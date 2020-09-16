@@ -4,25 +4,24 @@ pipeline {
         stage ('Package Stage') {
 
             steps {
-                withMaven(maven : 'apache-maven-3.6.1') {
-                    bat 'mvn clean package'
-                }
+                 echo "compiling and packing"
+                 bat label:'',script:'mvn package'    
             }
         }
         stage ('Testing Stage') {
 
             steps {
-                withMaven(maven : 'apache-maven-3.6.1') {
-                    bat 'mvn test'
+                echo "testing stage"
+                  bat label:'',script:'mvn test'  
                 }
-            }
         }
         stage ('Install Stage') {
             steps {
-                withMaven(maven : 'apache-maven-3.6.1') {
-                    bat 'mvn install'
+                echo "installing in local system"
+                bat label:'',script:'mvn install' 
+                    
                 }
             }
         }
     }
-}
+
